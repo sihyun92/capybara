@@ -1,0 +1,24 @@
+@use "sass:list";
+@use "sass:map";
+
+@function next-shade($shades, $current-key, $step: 1) {
+  $keys: map.keys($shades);
+  $index: list.index($keys, $current-key);
+
+  @if $index == null or $index + $step > list.length($keys) {
+    @return $current-key;
+  }
+
+  @return list.nth($keys, $index + $step);
+}
+
+@function prev-shade($shades, $current-key, $step: 1) {
+  $keys: map.keys($shades);
+  $index: list.index($keys, $current-key);
+
+  @if $index == null or $index - $step < 1 {
+    @return $current-key;
+  }
+
+  @return list.nth($keys, $index - $step);
+}
