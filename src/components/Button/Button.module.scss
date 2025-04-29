@@ -1,0 +1,74 @@
+@use "sass:map";
+
+// color-mapping
+@each $color, $shades in $color-map {
+  @each $index, $value in $shades {
+    $hover-index: prev-shade($shades, $index);
+    $active-index: next-shade($shades, $index);
+
+    // background color class
+    .bg-#{"#{$color}"}-#{$index} {
+      background: $value;
+
+      &:not(:disabled):hover {
+        background: map.get($shades, $hover-index);
+      }
+
+      &:not(:disabled):active {
+        background: map.get($shades, $active-index);
+      }
+    }
+
+    // text color class
+    .text-#{"#{$color}"}-#{$index} {
+      color: $value;
+    }
+
+    .border-#{"#{$color}"}-#{$index} {
+      border: 1px solid $value;
+    }
+  }
+}
+
+.block {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.disabled-default {
+  background: $gray_2;
+  color: $gray_7;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.x-small {
+  height: 24px;
+  padding: $button-xs;
+  font-size: 0.75rem;
+}
+
+.small {
+  height: 32px;
+  padding: $button-sm;
+  font-size: 0.875rem;
+}
+
+.medium {
+  height: 40px;
+  padding: $button-md;
+  font-size: 1rem;
+}
+
+.large {
+  height: 48px;
+  font-size: 1.125rem;
+  padding: $button-lg;
+}
