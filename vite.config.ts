@@ -15,7 +15,8 @@ export default defineConfig({
     alias: {
       "@components": path.resolve(__dirname, "src/components"),
       "@styles": path.resolve(__dirname, "src/styles"),
-      "@types": path.resolve(__dirname, "src/types/"),
+      "@interface": path.resolve(__dirname, "src/interface"),
+      "@utils": path.resolve(__dirname, "src/utils"),
     },
   },
   test: {
@@ -26,7 +27,11 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@styles/global.scss" as *;`,
+        additionalData: `
+          @use "@styles/global.scss" as *;
+          @use "@styles/colors.scss" as *;
+          @use "@styles/functions" as *;
+        `,
       },
     },
   },
